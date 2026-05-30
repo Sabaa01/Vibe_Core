@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIBE_CORE</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+font-family:'Space Grotesk',sans-serif;
+background:#05050A;
+overflow-x:hidden;
+}
+
+h1,h2,h3,.logo{
+font-family:'Orbitron',sans-serif;
+}
+
+.glow{
+text-shadow:0 0 10px #8B5CF6,0 0 20px #06B6D4;
+}
+
+.hero-bg{
+background:
+linear-gradient(rgba(5,5,10,.75),rgba(5,5,10,.85)),
+url('https://images.unsplash.com/photo-1571266028243-d220c9f6f8af?auto=format&fit=crop&w=1800&q=80');
+background-size:cover;
+background-position:center;
+}
+
+.equalizer{
+display:flex;
+gap:4px;
+height:60px;
+align-items:flex-end;
+}
+
+.bar{
+width:8px;
+background:linear-gradient(#06B6D4,#EC4899);
+animation:bounce 1s infinite ease-in-out;
+}
+
+.bar:nth-child(2){animation-delay:.1s;}
+.bar:nth-child(3){animation-delay:.2s;}
+.bar:nth-child(4){animation-delay:.3s;}
+.bar:nth-child(5){animation-delay:.4s;}
+
+@keyframes bounce{
+0%,100%{height:10px;}
+50%{height:60px;}
+}
+
+.track-bars{
+display:none;
+gap:3px;
+height:20px;
+align-items:flex-end;
+}
+
+.track-bars span{
+width:3px;
+background:#06B6D4;
+animation:bounceTrack .8s infinite;
+}
+
+.track-bars span:nth-child(2){animation-delay:.1s;}
+.track-bars span:nth-child(3){animation-delay:.2s;}
+.track-bars span:nth-child(4){animation-delay:.3s;}
+
+@keyframes bounceTrack{
+0%,100%{height:5px;}
+50%{height:20px;}
+}
+
+.playing .track-bars{
+display:flex;
+}
+
+.neon-btn{
+border:1px solid #8B5CF6;
+box-shadow:0 0 15px #8B5CF6;
+transition:.3s;
+}
+
+.neon-btn:hover{
+transform:translateY(-3px);
+box-shadow:0 0 30px #EC4899;
+}
+
+.artist-card img{
+transition:.6s;
+filter:grayscale(100%) contrast(1.2) hue-rotate(250deg);
+}
+
+.artist-card:hover img{
+filter:none;
+transform:scale(1.1);
+}
+
+.artist-overlay{
+opacity:0;
+transition:.4s;
+}
+
+.artist-card:hover .artist-overlay{
+opacity:1;
+}
+
+.stat-card{
+box-shadow:0 0 25px rgba(139,92,246,.4);
+}
+
+.grid-bg{
+background-image:
+linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+background-size:30px 30px;
+}
+</style>
+</head>
+<body class="text-white">
+
+<header class="fixed w-full z-50 backdrop-blur-lg bg-white/5 border-b border-white/10">
+<div class="max-w-7xl mx-auto flex justify-between items-center p-5">
+
+<div class="logo text-2xl font-black glow">
+VIBE_CORE
+</div>
+
+<nav class="hidden md:flex gap-8">
+<a href="#tracks" class="hover:text-cyan-400">Tracks</a>
+<a href="#artists" class="hover:text-pink-400">Artists</a>
+<a href="#stats" class="hover:text-purple-400">Stats</a>
+</nav>
+
+<button id="menuBtn" class="md:hidden text-2xl">☰</button>
+
+</div>
+
+<div id="mobileMenu" class="hidden flex-col bg-black/90 p-5 md:hidden">
+<a href="#tracks" class="py-2">Tracks</a>
+<a href="#artists" class="py-2">Artists</a>
+<a href="#stats" class="py-2">Stats</a>
+</div>
+</header>
+
+<section class="hero-bg min-h-screen flex items-center">
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+
+<div>
+<h1 class="text-5xl md:text-7xl font-black leading-tight glow">
+REDEFINE<br>THE SOUND
+</h1>
+
+<p class="mt-6 text-gray-300">
+Next-generation music platform for producers,
+artists and audio innovators.
+</p>
+
+<div class="flex gap-4 mt-8">
+<button class="neon-btn px-6 py-3 rounded-xl">
+Launch Beats
+</button>
+
+<button class="border border-cyan-500 px-6 py-3 rounded-xl">
+Explore
+</button>
+</div>
+</div>
+
+<div class="flex justify-center">
+<div class="equalizer">
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="tracks" class="py-20 px-6">
+<div class="max-w-6xl mx-auto">
+
+<h2 class="text-4xl font-bold mb-10 text-center glow">
+CORE TRACKS
+</h2>
+
+<div class="space-y-4">
+
+<div class="track bg-white/5 p-5 rounded-xl flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="track-bars">
+<span></span><span></span><span></span><span></span>
+</div>
+<span>Neon Horizon</span>
+</div>
+<button class="playBtn bg-purple-600 px-4 py-2 rounded">
+▶
+</button>
+</div>
+
+<div class="track bg-white/5 p-5 rounded-xl flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="track-bars">
+<span></span><span></span><span></span><span></span>
+</div>
+<span>Cyber Pulse</span>
+</div>
+<button class="playBtn bg-purple-600 px-4 py-2 rounded">
+▶
+</button>
+</div>
+
+<div class="track bg-white/5 p-5 rounded-xl flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="track-bars">
+<span></span><span></span><span></span><span></span>
+</div>
+<span>Night Frequency</span>
+</div>
+<button class="playBtn bg-purple-600 px-4 py-2 rounded">
+▶
+</button>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="artists" class="py-20 px-6">
+<div class="max-w-7xl mx-auto">
+
+<h2 class="text-4xl text-center font-bold glow mb-12">
+CREATORS
+</h2>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="artist-card relative overflow-hidden rounded-3xl h-96">
+<img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800"
+class="w-full h-full object-cover">
+<div class="artist-overlay absolute inset-0 bg-black/70 flex items-center justify-center">
+<p>Electronic Producer</p>
+</div>
+</div>
+
+<div class="artist-card relative overflow-hidden rounded-3xl h-[500px]">
+<img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800"
+class="w-full h-full object-cover">
+<div class="artist-overlay absolute inset-0 bg-black/70 flex items-center justify-center">
+<p>Festival DJ</p>
+</div>
+</div>
+
+<div class="artist-card relative overflow-hidden rounded-3xl h-80">
+<img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800"
+class="w-full h-full object-cover">
+<div class="artist-overlay absolute inset-0 bg-black/70 flex items-center justify-center">
+<p>Sound Designer</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="stats" class="py-20 px-6">
+<div class="max-w-6xl mx-auto">
+
+<div class="grid md:grid-cols-4 gap-6">
+
+<div class="stat-card bg-white/5 p-8 rounded-2xl text-center">
+<h3 class="text-4xl font-bold text-cyan-400">5M+</h3>
+<p>Streams</p>
+</div>
+
+<div class="stat-card bg-white/5 p-8 rounded-2xl text-center">
+<h3 class="text-4xl font-bold text-pink-400">200+</h3>
+<p>Exclusive Beats</p>
+</div>
+
+<div class="stat-card bg-white/5 p-8 rounded-2xl text-center">
+<h3 class="text-4xl font-bold text-purple-400">50K+</h3>
+<p>Artists</p>
+</div>
+
+<div class="stat-card bg-white/5 p-8 rounded-2xl text-center">
+<h3 class="text-4xl font-bold text-cyan-400">24/7</h3>
+<p>Live Audio Lab</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<footer class="grid-bg py-16 px-6 border-t border-white/10">
+<div class="max-w-6xl mx-auto text-center">
+
+<h3 class="logo text-3xl glow mb-6">
+VIBE_CORE
+</h3>
+
+<div class="flex justify-center gap-6 text-2xl mb-8">
+<a href="#">🎧</a>
+<a href="#">🎵</a>
+<a href="#">📡</a>
+</div>
+
+<input
+type="email"
+placeholder="Enter your email..."
+class="bg-black/50 border border-purple-500 rounded-xl px-5 py-3 w-full max-w-md outline-none focus:shadow-[0_0_30px_#8B5CF6]"
+>
+
+<p class="mt-6 text-gray-400">
+© 2026 VIBE_CORE
+</p>
+
+</div>
+</footer>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+menuBtn.addEventListener("click", () => {
+mobileMenu.classList.toggle("hidden");
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+link.addEventListener("click",e=>{
+e.preventDefault();
+document.querySelector(link.getAttribute("href"))
+.scrollIntoView({behavior:"smooth"});
+});
+});
+
+const buttons=document.querySelectorAll(".playBtn");
+
+buttons.forEach(btn=>{
+btn.addEventListener("click",()=>{
+
+const row=btn.closest(".track");
+
+if(row.classList.contains("playing")){
+row.classList.remove("playing");
+btn.textContent="▶";
+}else{
+
+document.querySelectorAll(".track").forEach(t=>{
+t.classList.remove("playing");
+t.querySelector(".playBtn").textContent="▶";
+});
+
+row.classList.add("playing");
+btn.textContent="❚❚";
+}
+
+});
+});
+</script>
+
+</body>
+</html>
